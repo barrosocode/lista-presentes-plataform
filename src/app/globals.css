@@ -43,7 +43,7 @@ a {
 .stamp-background {
     --primary-color: #e4794a; /* Cor principal */
     --secondary-color: #a85438; /* Cor secundária */
-    --size: 1px; /* Tamanho dos recortes */
+    --size: 2px; /* Tamanho dos recortes */
 
     position: fixed;
     inset: 0;

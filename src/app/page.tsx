@@ -81,7 +81,7 @@ export default function Home() {
                 <CircleImage image="/foto-principal.jpeg" sizeFactor={2} />
             </Grid>
             <Grid container spacing={5} justifyContent={"center"} alignItems={"center"} style={{minWidth: "100%"}}>
-                <Typography textAlign={"center"} variant="h3">
+                <Typography textAlign={"center"} variant="h4">
                     Olá!
                     <br />
                     É com muita alegria que nós,
