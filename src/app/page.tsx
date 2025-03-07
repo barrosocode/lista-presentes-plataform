@@ -81,16 +81,18 @@ export default function Home() {
                 <CircleImage image="/foto-principal.jpeg" sizeFactor={2} />
             </Grid>
             <Grid container spacing={5} justifyContent={"center"} alignItems={"center"} style={{minWidth: "100%"}}>
-                <Typography textAlign={"center"} variant="h5">
-                    Olá! É com muita alegria que nós,
+                <Typography textAlign={"center"} variant="h3">
+                    Olá!
                     <br />
-                    Gabriel Barroso Faustino Gomes e Beatriz de Oliveira Figueiredo,
+                    É com muita alegria que nós,
+                    <br />
+                    Gabriel e Beatriz,
                     <br />
                     Convidamos você para o nosso
                 </Typography>
             </Grid>
             <Grid container spacing={5} justifyContent={"center"} alignItems={"center"} style={{minWidth: "100%"}}>
-                <Typography variant="h1" textAlign={"center"}>
+                <Typography className="titulo-especial" variant="h1" textAlign={"center"}>
                     Chá de Panela
                 </Typography>
             </Grid>
@@ -135,7 +137,7 @@ export default function Home() {
                 </Grid>
             </Grid>
             <Grid container spacing={5} justifyContent={"center"} alignItems={"center"} style={{minWidth: "100%"}}>
-                <Typography variant="h4" textAlign={"center"}>
+                <Typography variant="h3" textAlign={"center"}>
                     Lista de presentes
                 </Typography>
             </Grid>

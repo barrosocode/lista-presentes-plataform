@@ -3,13 +3,6 @@
     --foreground: #3e1f15; /*#943308; /*#171717;*/
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
 html,
 body {
     max-width: 100vw;
@@ -19,7 +12,8 @@ body {
 body {
     color: var(--foreground);
     background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: var(--font-dancing-script);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -35,8 +29,32 @@ a {
     text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
-    }
+/* Título especial */
+/* Usa Dancing Script apenas em títulos específicos */
+.titulo-especial {
+    font-family: var(--font-dancing-script), cursive;
+    /* font-size: 8rem; */
+    /* color: #A85438; */
+    font-variant: bold;
+}
+
+/* Stamp Background Effect */
+
+.stamp-background {
+    --primary-color: #e4794a; /* Cor principal */
+    --secondary-color: #a85438; /* Cor secundária */
+    --size: 1px; /* Tamanho dos recortes */
+
+    position: fixed;
+    inset: 0;
+    z-index: -10; /* Mantém o efeito bem no fundo */
+    pointer-events: none; /* Evita que interfira com interações */
+
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+    /* Máscara aplicada APENAS ao fundo */
+    mask-image: radial-gradient(circle at top left, transparent var(--size), white var(--size)), radial-gradient(circle at top right, transparent var(--size), white var(--size)), radial-gradient(circle at bottom left, transparent var(--size), white var(--size)), radial-gradient(circle at bottom right, transparent var(--size), white var(--size)), repeating-linear-gradient(to right, white 0, white var(--size), transparent var(--size), transparent calc(var(--size) * 2)), repeating-linear-gradient(to bottom, white 0, white var(--size), transparent var(--size), transparent calc(var(--size) * 2));
+
+    -webkit-mask-composite: destination-in;
+    mask-composite: intersect;
 }
