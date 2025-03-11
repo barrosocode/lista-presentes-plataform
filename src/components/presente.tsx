@@ -35,6 +35,13 @@ const Presente: React.FC<PresenteProps> = ({presente, convidados}) => {
             return;
         }
 
+        // Verificar se algum usuário foi selecionado
+        if (!idConvidado) {
+            console.log("Por favor, selecione seu nome!");
+            Swal.fire("Erro!", "Por favor, selecione seu nome", "error");
+            return;
+        }
+
         // Preparando o objeto com os parâmetros para cadastro
         const params = {
             idPresente,
