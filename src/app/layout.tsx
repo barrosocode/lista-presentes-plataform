@@ -40,8 +40,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${poppins.variable} ${dancingScript.variable}`}>
+        <html lang="pt-br">
+            <body className={`${poppins.className} ${dancingScript.variable}`}>
                 {/* Fundo separado do conteúdo */}
                 <div className="stamp-background"></div>
                 {/* Container do conteúdo para evitar interferências */}
