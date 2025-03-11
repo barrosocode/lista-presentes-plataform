@@ -41,7 +41,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="pt-br">
-            <body className={`${poppins.className} ${dancingScript.variable}`}>
+            <body className={`${poppins.className} ${dancingScript.className}`}>
                 {/* Fundo separado do conteúdo */}
                 <div className="stamp-background"></div>
                 {/* Container do conteúdo para evitar interferências */}
