@@ -19,16 +19,6 @@ const dancingScript = Dancing_Script({
     variable: "--font-dancing-script",
 });
 
-// const geistSans = Geist({
-//     variable: "--font-geist-sans",
-//     subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//     variable: "--font-geist-mono",
-//     subsets: ["latin"],
-// });
-
 export const metadata: Metadata = {
     title: "Chá de Panela B&b",
     description: "Nosso convite",
@@ -41,7 +31,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="pt-br">
-            <body className={`${poppins.className} ${dancingScript.className}`}>
+            <body className={`${poppins.className} ${dancingScript.variable}`}>
                 {/* Fundo separado do conteúdo */}
                 <div className="stamp-background"></div>
                 {/* Container do conteúdo para evitar interferências */}
