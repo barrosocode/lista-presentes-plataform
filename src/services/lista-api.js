@@ -62,6 +62,24 @@ async function updateConvidado(id, params) {
  * CRUD Presentes
  */
 
+// Create
+async function createPresentes(params) {
+    // Tratar url da requisição
+    const finalUrl = `${BASE_URL}/presentes/`;
+
+    // Realizar requisição
+    try {
+        const response = await fetch(finalUrl, {method: "POST", body: params});
+        const data = response.json();
+
+        return data;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
 // Read
 async function readPresentes() {
     // Tratar url da requisição
@@ -170,6 +188,7 @@ export {
     readConvidados,
     updateConvidado,
     // Presentes
+    createPresentes,
     readPresentes,
     updatePresente,
     // Presente_Convidado
