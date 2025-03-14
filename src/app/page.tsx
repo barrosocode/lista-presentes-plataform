@@ -1,5 +1,4 @@
 "use client";
-
 // Imports
 import CircleImage from "@/components/circle-image";
 import Presente from "@/components/presente";

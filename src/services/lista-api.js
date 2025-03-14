@@ -5,6 +5,24 @@ const BASE_URL = "https://lista-presentes-api-production.up.railway.app";
  * CRUD Convidados
  */
 
+// Create
+async function createConvidado(params) {
+    // Tratar url da requisição
+    const finalUrl = `${BASE_URL}/convidados/`;
+
+    // Realizar requisição
+    try {
+        const response = await fetch(finalUrl, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({name: params.name, confirmed: params.confirmed})});
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error("Erro ao cadastrar convidado:", error);
+
+        return null;
+    }
+}
+
 // Read
 async function readConvidados() {
     // Tratar url da requisição
@@ -148,6 +166,7 @@ async function readRoles() {
 
 export {
     // Convidados
+    createConvidado,
     readConvidados,
     updateConvidado,
     // Presentes
