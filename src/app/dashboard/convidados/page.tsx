@@ -25,8 +25,6 @@ export default function Convidados() {
         fetchData();
     }, []);
 
-    console.log(convidados);
-
     return (
         <Grid container padding={5}>
             <Grid container minWidth={"100%"}>

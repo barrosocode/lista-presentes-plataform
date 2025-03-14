@@ -102,6 +102,50 @@ async function createPresenteConvidado(params) {
     }
 }
 
+// Read
+async function readPresentesConvidados() {
+    // Tratar url da requisição
+    const finalUrl = `${BASE_URL}/presentes-convidados/`;
+
+    // Realizar requisição
+    try {
+        const response = await fetch(finalUrl, {method: "GET"});
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
+// =============================================================================
+// Função para testar a api do devocionando usando fetch
+
+/**
+ * Roles
+ */
+
+// Read
+async function readRoles() {
+    // Tratar url da requisição
+    const finalUrl = `http://devocionando-api-production.up.railway.app/roles/`;
+
+    // Realizar requisição
+    try {
+        const response = await fetch(finalUrl, {method: "GET"});
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+// =============================================================================
+
 export {
     // Convidados
     readConvidados,
@@ -111,4 +155,7 @@ export {
     updatePresente,
     // Presente_Convidado
     createPresenteConvidado,
+    readPresentesConvidados,
+    // asdfadsf
+    readRoles,
 };
