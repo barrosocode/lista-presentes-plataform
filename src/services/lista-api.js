@@ -98,6 +98,23 @@ async function readPresentes() {
     }
 }
 
+// Find
+async function findPresente(id) {
+    const finalUrl = `${BASE_URL}/presentes/${id}/`;
+
+    // realizar requisição
+    try {
+        const response = await fetch(finalUrl, {method: "GET"});
+        const data = response.json();
+
+        return data;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
 // Update
 async function updatePresente(id, params) {
     // Tratar url da requisição
@@ -105,7 +122,7 @@ async function updatePresente(id, params) {
 
     // Realizar requisição
     try {
-        const response = await fetch(finalUrl, {method: "PUT", headers: {"Content-Type": "application/json"}, body: JSON.stringify({name: params.name, image: params.image, link: params.link, store: params.store, description: params.description, amount: params.amount, status: params.status})});
+        const response = await fetch(finalUrl, {method: "PUT", body: params});
         const data = await response.json();
 
         return data;
@@ -156,32 +173,6 @@ async function readPresentesConvidados() {
     }
 }
 
-// =============================================================================
-// Função para testar a api do devocionando usando fetch
-
-/**
- * Roles
- */
-
-// Read
-async function readRoles() {
-    // Tratar url da requisição
-    const finalUrl = `http://devocionando-api-production.up.railway.app/roles/`;
-
-    // Realizar requisição
-    try {
-        const response = await fetch(finalUrl, {method: "GET"});
-        const data = await response.json();
-
-        return data;
-    } catch (error) {
-        console.log(error);
-
-        return null;
-    }
-}
-// =============================================================================
-
 export {
     // Convidados
     createConvidado,
@@ -190,10 +181,9 @@ export {
     // Presentes
     createPresentes,
     readPresentes,
+    findPresente,
     updatePresente,
     // Presente_Convidado
     createPresenteConvidado,
     readPresentesConvidados,
-    // asdfadsf
-    readRoles,
 };

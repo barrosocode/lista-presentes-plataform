@@ -1,13 +1,17 @@
 "use client";
 // Imports
-import {createPresentes} from "@/services/lista-api";
+import {updatePresente, findPresente} from "@/services/lista-api";
 import {Avatar, Box, Button, Card, CardHeader, TextField, Typography} from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import {useState} from "react";
+import {useParams} from "next/navigation";
+import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
 
 // Export
-export default function CreatePresente() {
+export default function EditPresente() {
+    //
+    const {id} = useParams();
+
     // Constantes para atribuir valor ao nome
     const [name, setName] = useState<string>("");
     const [link, setLink] = useState<string>("");
@@ -19,6 +23,24 @@ export default function CreatePresente() {
     const [imagem, setImagem] = useState<File | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
 
+    useEffect(() => {
+        // Função responsável por buscar o valor do presente cujo id é dado na url
+        async function fetchPresente(id: string) {
+            const data = await findPresente(id);
+            if (data) {
+                console.log(data);
+                setName(data.name);
+                setLink(data.link);
+                setStore(data.store);
+                setDescription(data.description);
+                setAmount(data.amount);
+                // setImagem(data.image)
+            }
+        }
+
+        fetchPresente(String(id));
+    }, [id]);
+
     const handleImagemChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
@@ -28,7 +50,7 @@ export default function CreatePresente() {
     };
 
     // Função para cadastrar convidado
-    const cadastrarPresente = async () => {
+    const atualizarPresente = async () => {
         // Tratar parâmetros da requisição
         const params = new FormData();
         params.append("name", name);
@@ -41,16 +63,19 @@ export default function CreatePresente() {
             params.append("image", imagem);
         }
 
+        console.log(name, link, store, description, amount);
+        console.log(params);
+
         // Realizar requisição
         try {
-            const data = await createPresentes(params);
+            const data = await updatePresente(id, params);
 
             if (data.id) {
                 Swal.fire("Sucesso!", "Presente cadastrado com sucesso", "success").then(() => {
                     window.location.href = "/dashboard/presentes";
                 });
             } else {
-                Swal.fire("Erro!", `Erro ao cadastrar presente: ${JSON.stringify(data)}`, "error");
+                Swal.fire("Erro!", `Erro ao cadastrar presente: ${JSON.stringify(data)} hahaha`, "error");
             }
         } catch (error) {
             Swal.fire("Erro!", `Erro ao cadastrar presente: ${JSON.stringify(error)}`, "error");
@@ -64,12 +89,12 @@ export default function CreatePresente() {
                     <Typography variant="h3">Presentes</Typography>
                 </Grid>
                 <Grid size={12}>
-                    <Typography variant="h5">Dashboard / Presentes / Cadastrar Presente</Typography>
+                    <Typography variant="h5">Dashboard / Presentes / Editar Presente</Typography>
                 </Grid>
             </Grid>
             <Grid container minWidth={"100%"} marginY={3}>
                 <Card sx={{minWidth: "100%"}}>
-                    <CardHeader title="Cadastrar Presente" />
+                    <CardHeader title="Editar Presente" />
                     <Grid>
                         <Grid container minWidth={"100%"} padding={2} justifyContent={"center"}>
                             <Grid size={6}>
@@ -128,8 +153,8 @@ export default function CreatePresente() {
                         </Grid>
                         <Grid container minWidth={"100%"} padding={2} justifyContent={"center"}>
                             <Grid size={3}>
-                                <Button onClick={() => cadastrarPresente()} variant="outlined" fullWidth sx={{borderColor: "#ca6234", color: "#ca6234"}}>
-                                    Cadastrar
+                                <Button onClick={() => atualizarPresente()} variant="outlined" fullWidth sx={{borderColor: "#ca6234", color: "#ca6234"}}>
+                                    Atualizar
                                 </Button>
                             </Grid>
                         </Grid>
