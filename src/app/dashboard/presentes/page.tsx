@@ -4,10 +4,14 @@
 import ConvidadosInterface from "@/interfaces/convidados-interface";
 import PresentesConvidadosInterface from "@/interfaces/presentes-convidados-interface";
 import PresentesInterface from "@/interfaces/presentes-interface";
-import {readConvidados, readPresentes, readPresentesConvidados} from "@/services/lista-api";
-import {Box, Card, CardHeader, Chip, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@mui/material";
+import {deletePresente, readConvidados, readPresentes, readPresentesConvidados} from "@/services/lista-api";
+import {Box, Card, CardHeader, Chip, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import {useEffect, useState} from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import {useRouter} from "next/navigation";
+import Swal from "sweetalert2";
 
 // Export
 export default function Presentes() {
@@ -15,6 +19,7 @@ export default function Presentes() {
     const [presentes, setPresentes] = useState<PresentesInterface[]>([]);
     const [presentesConvidados, setPresentesConvidados] = useState<PresentesConvidadosInterface[]>([]);
     const [convidados, setConvidados] = useState<ConvidadosInterface[]>([]);
+    const router = useRouter();
 
     // Chamada da função que lista os presentes
     useEffect(() => {
@@ -44,6 +49,23 @@ export default function Presentes() {
         fetchPresentesConvidados();
         fetchConvidados();
     }, []);
+
+    const handleEdit = (id: string | number) => {
+        router.push(`/dashboard/presentes/editar/${id}`);
+    };
+
+    const handleDelete = (id: string) => {
+        // Realizar requisição
+        deletePresente(id)
+            .then(() => {
+                Swal.fire("Sucesso!", "Presente excluído com sucesso", "success").then(() => {
+                    window.location.href = "/dashboard/presentes";
+                });
+            })
+            .catch(() => {
+                Swal.fire("Erro!", "Erro ao excluir presente", "error");
+            });
+    };
 
     return (
         <Grid container padding={5}>
@@ -75,6 +97,9 @@ export default function Presentes() {
                                         <TableCell>
                                             <Typography>Convidado</Typography>
                                         </TableCell>
+                                        <TableCell>
+                                            <Typography>Ações</Typography>
+                                        </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -89,6 +114,24 @@ export default function Presentes() {
                                             <TableCell>{presente.status ? <Chip label="Disponível" color="success" variant="outlined" /> : <Chip label="Indisponível" color="error" variant="outlined" />}</TableCell>
                                             <TableCell>
                                                 <Typography>{presentesConvidados.filter((e) => e.presente == presente.id).map((presenteConvidado, index) => (!index ? convidados.find((e) => e.id == presenteConvidado.convidado)?.name : "/ " + convidados.find((e) => e.id == presenteConvidado.convidado)?.name))}</Typography>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Grid>
+                                                    <IconButton
+                                                        onClick={() => {
+                                                            handleEdit(presente.id);
+                                                        }}
+                                                    >
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                    <IconButton
+                                                        onClick={() => {
+                                                            handleDelete(presente.id);
+                                                        }}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Grid>
                                             </TableCell>
                                         </TableRow>
                                     ))}

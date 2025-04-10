@@ -133,6 +133,24 @@ async function updatePresente(id, params) {
     }
 }
 
+// Delete
+async function deletePresente(id) {
+    // Tratar url da requisição
+    const finalUrl = `${BASE_URL}/presentes/${id}/`;
+
+    // realizar requisição
+    try {
+        const response = await fetch(finalUrl, {method: "DELETE"});
+        const data = response.ok;
+
+        return data;
+    } catch (error) {
+        console.log(error);
+
+        return null;
+    }
+}
+
 /**
  * CRUD Presente_convidado
  */
@@ -183,6 +201,7 @@ export {
     readPresentes,
     findPresente,
     updatePresente,
+    deletePresente,
     // Presente_Convidado
     createPresenteConvidado,
     readPresentesConvidados,
