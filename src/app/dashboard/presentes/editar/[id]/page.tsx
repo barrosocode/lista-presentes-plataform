@@ -71,14 +71,14 @@ export default function EditPresente() {
             const data = await updatePresente(id, params);
 
             if (data.id) {
-                Swal.fire("Sucesso!", "Presente cadastrado com sucesso", "success").then(() => {
+                Swal.fire("Sucesso!", "Presente atualizado com sucesso", "success").then(() => {
                     window.location.href = "/dashboard/presentes";
                 });
             } else {
-                Swal.fire("Erro!", `Erro ao cadastrar presente: ${JSON.stringify(data)} hahaha`, "error");
+                Swal.fire("Erro!", `Erro ao atualizar presente: ${JSON.stringify(data)} hahaha`, "error");
             }
         } catch (error) {
-            Swal.fire("Erro!", `Erro ao cadastrar presente: ${JSON.stringify(error)}`, "error");
+            Swal.fire("Erro!", `Erro ao atualizar presente: ${JSON.stringify(error)}`, "error");
         }
     };
 
